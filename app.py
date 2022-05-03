@@ -8,7 +8,7 @@ from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_HOST'] = 'remotemysql.com' #env.getEnv("")
 app.config['MYSQL_USER'] = 'FVJpgw76FR'
 app.config['MYSQL_PASSWORD'] = '0uDPWv3khs'
 app.config['MYSQL_DB'] = 'FVJpgw76FR'
@@ -136,4 +136,4 @@ def pagina_no_encontrada(error):
 if __name__ == '__main__':
     # app.config.from_object(config['development'])
     app.register_error_handler(404, pagina_no_encontrada)
-    app.run()
+    app.run(debug=True)
