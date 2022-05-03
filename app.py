@@ -2,11 +2,13 @@ from sqlite3 import Cursor
 from flask import Flask, jsonify, request
 from config import config
 from flask_mysqldb import MySQL
-
+from flask_cors import CORS, cross_origin
 
 
 
 app = Flask(__name__)
+
+CORS(app)
 
 app.config['MYSQL_HOST'] = 'remotemysql.com' #env.getEnv("")
 app.config['MYSQL_USER'] = 'FVJpgw76FR'
@@ -27,6 +29,7 @@ def index():
     '<h2>Para eliminar un producto, ingresa a la ruta /productos/id con metodo delete</h2>'
     )
 
+@cross_origin
 @app.route('/productos', methods=['GET'])
 def listar_productos():
     try:
@@ -50,6 +53,7 @@ def listar_productos():
     except Exception as e:
         return jsonify({'error': str(e)})
 
+@cross_origin
 @app.route('/productos/<id>', methods=['GET'])
 def ver_producto(id):
     try:
@@ -73,7 +77,7 @@ def ver_producto(id):
         return jsonify({'error': str(e)})
 
 
-
+@cross_origin
 @app.route('/productos', methods=['POST'])
 def agregar_producto():
     try:
@@ -93,6 +97,7 @@ def agregar_producto():
     except Exception as e:
         return jsonify({'error': str(e)})
 
+@cross_origin
 @app.route('/productos/<id>', methods=['DELETE'])
 def eliminar_producto(id):
     try:
@@ -105,7 +110,7 @@ def eliminar_producto(id):
     except Exception as e:
         return jsonify({'error': str(e)})
 
-
+@cross_origin
 @app.route('/productos/<id>', methods=['PUT'])
 def actualizar_producto(id):
     try:
