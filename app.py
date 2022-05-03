@@ -4,7 +4,15 @@ from config import config
 from flask_mysqldb import MySQL
 
 
+
+
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_USER'] = 'FVJpgw76FR'
+app.config['MYSQL_PASSWORD'] = '0uDPWv3khs'
+app.config['MYSQL_DB'] = 'FVJpgw76FR'
+
 
 conexion = MySQL(app)
 
@@ -126,6 +134,6 @@ def pagina_no_encontrada(error):
     return '<h1>La pagina que estas buescando no existe</h1>', 404
 
 if __name__ == '__main__':
-    app.config.from_object(config['development'])
+    # app.config.from_object(config['development'])
     app.register_error_handler(404, pagina_no_encontrada)
     app.run()
